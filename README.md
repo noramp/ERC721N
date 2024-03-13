@@ -100,6 +100,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 ## Contact
 
 - rarepepi (owner) - [@rarepepi](https://twitter.com/rarepepi)
+- 0xinuarashi (maintainer) - [@0xinuarashi](https://twitter.com/0xinuarashi)
 - cygaar (maintainer) - [@0xCygaar](https://twitter.com/0xCygaar)
 - vectorized.eth (maintainer) - [@optimizoor](https://twitter.com/optimizoor)
 
