@@ -12,7 +12,7 @@ The [NoRamp](https://twitter.com/NoRampLabs) team created ERC721N for its sale o
 
 ![NoRamp Labs](https://i.imgur.com/BBRVn7o.png)
 
-For more information on how ERC721N works under the hood, please visit our [blog](https://www.azuki.com/erc721n). To find other projects that are using ERC721N, please visit [erc721n.org](https://www.erc721n.org)
+For more information on how ERC721N works under the hood, please visit our [blog](https://medium.com/@NoRamp). To find other projects that are using ERC721N, please visit [erc721n.org](https://www.erc721n.org)
 
 **NoRamp Labs is not liable for any outcomes as a result of using ERC721N.** DYOR.
 
