@@ -1,15 +1,3 @@
-[![Docs][docs-shield]][docs-url]
-[![NPM][npm-shield]][npm-url]
-[![CI][ci-shield]][ci-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![Coverage][coverage-shield]][coverage-url]
-
-<!-- OTHER BADGES -->
-<!-- [![Contributors][contributors-shield]][contributors-url] -->
-<!-- [![Forks][forks-shield]][forks-url] -->
-<!-- [![Stargazers][stars-shield]][stars-url] -->
-
 <!-- ANNOUNCEMENT -->
 
 _We highly recommend reading the our guide_, **especially** \_the part on [`safeMint`](https://medium.com/@NoRamp)
@@ -18,11 +6,11 @@ _We highly recommend reading the our guide_, **especially** \_the part on [`safe
 
 ## About The Project
 
-The goal of ERC721N is to provide a fully compliant implementation of IERC721 with additional features as in ERC20 Treasury Management and Redeemption in a single transaction. This project and implementation will be updated regularly and will continue to stay up to date with best practices.
+The goal of ERC721N is to provide a fully compliant implementation of IERC721 with additional features like a ERC20 Treasury Management and Redeemption system. This project and implementation will be updated regularly and will continue to stay up to date with best practices.
 
-The [NoRamp](https://twitter.com/NoRampLabs) team created ERC721N for its sale on 1/12/22. There was significant demand for 8700 tokens made available to the public, and all were minted within minutes. The network BASEFEE remained low despite huge demand, resulting in low gas costs for minters, while minimizing network disruption for the wider ecosystem as well.
+The [NoRamp](https://twitter.com/NoRampLabs) team created ERC721N for its sale on 3/13/24. There was significant demand for KYC-less purchases of digital assets requested by the public, and all existing options are not good enough. We took it upon ourselves to create the ERC721N NFT Standard to solve the onboarding problems in crypto. Using an innovative NFT pass through system alongside ERC20 treasury management and secure redemption system we were able to create the experience we should learn to expect from crypto not the one we are used to.
 
-<!-- ![Gas Savings](https://pbs.twimg.com/media/FIdILKpVQAEQ_5U?format=jpg&name=medium) -->
+![NoRamp Labs](https://i.imgur.com/BBRVn7o.png)
 
 For more information on how ERC721N works under the hood, please visit our [blog](https://www.azuki.com/erc721n). To find other projects that are using ERC721N, please visit [erc721n.org](https://www.erc721n.org)
 
@@ -32,7 +20,6 @@ For more information on how ERC721N works under the hood, please visit our [blog
 
 ## Docs
 
-https://chiru-labs.github.io/ERC721A/
 https://docs.noramp.io/ERC721N/
 
 <!-- Installation -->
@@ -117,27 +104,3 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 - vectorized.eth (maintainer) - [@optimizoor](https://twitter.com/optimizoor)
 
 Project Link: [https://github.com/noramp/ERC721N](https://github.com/noramp/ERC721N)
-
-<!-- MARKDOWN LINKS & IMAGES -->
-
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-<!--
-[docs-shield]: https://img.shields.io/badge/docs-%F0%9F%93%84-blue?style=for-the-badge
-[docs-url]: https://chiru-labs.github.io/ERC721A/
-[npm-shield]: https://img.shields.io/npm/v/erc721a.svg?style=for-the-badge
-[npm-url]: https://www.npmjs.com/package/erc721a
-[ci-shield]: https://img.shields.io/github/actions/workflow/status/chiru-labs/ERC721A/run_tests.yml?label=build&style=for-the-badge&branch=main
-[ci-url]: https://github.com/chiru-labs/ERC721A/actions/workflows/run_tests.yml
-[contributors-shield]: https://img.shields.io/github/contributors/chiru-labs/ERC721A.svg?style=for-the-badge
-[contributors-url]: https://github.com/chiru-labs/ERC721A/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/chiru-labs/ERC721A.svg?style=for-the-badge
-[forks-url]: https://github.com/chiru-labs/ERC721A/network/members
-[stars-shield]: https://img.shields.io/github/stars/chiru-labs/ERC721A.svg?style=for-the-badge
-[stars-url]: https://github.com/chiru-labs/ERC721A/stargazers
-[issues-shield]: https://img.shields.io/github/issues/chiru-labs/ERC721A.svg?style=for-the-badge
-[issues-url]: https://github.com/chiru-labs/ERC721A/issues
-[license-shield]: https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge
-[license-url]: https://github.com/chiru-labs/ERC721A/blob/main/LICENSE.txt
-[coverage-shield]: https://img.shields.io/codecov/c/gh/chiru-labs/ERC721A?style=for-the-badge
-[coverage-url]: https://codecov.io/gh/chiru-labs/ERC721A
-[product-screenshot]: images/screenshot.png -->
