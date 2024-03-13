@@ -91,6 +91,10 @@ abstract contract ERC721N is ERC721, ERC721Burnable, ReentrancyGuard {
     function redeemReserves(uint256 tokenId) external nonReentrant {
         uint256 amount = tokenERC20Balances[tokenId];
         require(amount > 0, "No ERC20 balance to redeem");
+        require(
+            msg.sender == ownerOf(tokenId),
+            "Caller is not the owner of the NFT"
+        );
 
         // Burn the NFT
         _burn(tokenId);
