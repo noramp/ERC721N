@@ -64,7 +64,7 @@ contract ERC721NTest is ERC721N {
 - [ ] Add more documentation on benefits of using ERC721N
 - [ ] Maintain full test coverage
 
-See the [open issues](https://github.com/rarepepi/ERC721N/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/noramp/ERC721N/issues) for a full list of proposed features (and known issues).
 
 <!-- CONTRIBUTING -->
 
