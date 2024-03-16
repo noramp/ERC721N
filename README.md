@@ -2,7 +2,7 @@
 
 ## About The Project
 
-The goal of ERC721N is to provide a fully compliant implementation of IERC721 with additional features like a ERC20 Treasury Management and Redeemption system. This project and implementation will be updated regularly and will continue to stay up to date with best practices.
+The goal of ERC721N is to provide a fully compliant implementation of IERC721 with a bonus ERC20 Treasury Management and Redeemption system. This project and implementation will be updated regularly and will continue to stay up to date with best practices.
 
 The [NoRamp](https://twitter.com/NoRampLabs) team created ERC721N as an extension of the ERC721 standard with the additional features that make the NFTs token warrants on a treasury reserve ERC20. Mint NFT. Burn the NFT. Claim tokens.
 
