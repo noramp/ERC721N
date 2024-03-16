@@ -1,7 +1,3 @@
-<!-- ANNOUNCEMENT -->
-
-_We highly recommend reading the our guide_, **especially** \_the part on [`safeMint`](https://medium.com/@NoRamp)
-
 <!-- ABOUT THE PROJECT -->
 
 ## About The Project
