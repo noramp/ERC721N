@@ -83,11 +83,10 @@ abstract contract ERC721N is ERC721, ERC721Burnable, ReentrancyGuard {
      * @param _to The address that will own the minted token.
      * @param _quantity The amount of ERC20 tokens to be associated with the minted NFT.
      */
-    function _safeMint(
+    function safeMint(
         address _to,
-        uint256 _quantity,
-        bytes memory _data
-    ) internal virtual override nonReentrant {
+        uint256 _quantity
+    ) internal virtual nonReentrant {
         // Only the owner of the contract can mint new tokens
         if (msg.sender != _owner) {
             revert Unauthorized(msg.sender);

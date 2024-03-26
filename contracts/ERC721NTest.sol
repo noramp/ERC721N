@@ -9,6 +9,6 @@ contract ERC721NTest is ERC721N {
     }
 
     function mint(address to, uint256 amount) external {
-        _safeMint(to, amount);
+        safeMint(to, amount);
     }
 }
