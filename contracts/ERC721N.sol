@@ -81,29 +81,30 @@ abstract contract ERC721N is ERC721, ERC721Burnable, ReentrancyGuard {
      * @dev Safely mints a new ERC721N token with a specific ERC20 balance to a designated address.
      *      Can only be called by the owner of the contract.
      * @param _to The address that will own the minted token.
-     * @param _amount The amount of ERC20 tokens to be associated with the minted NFT.
+     * @param _quantity The amount of ERC20 tokens to be associated with the minted NFT.
      */
     function _safeMint(
         address _to,
-        uint256 _amount
-    ) internal override nonReentrant {
+        uint256 _quantity,
+        bytes memory _data
+    ) internal virtual override nonReentrant {
         // Only the owner of the contract can mint new tokens
         if (msg.sender != _owner) {
             revert Unauthorized(msg.sender);
         }
         // User must select a valid amount of ERC20 tokens to reserve
-        if (_amount <= 0) {
-            revert AmountMustBeGreaterThan0(_amount);
+        if (_quantity <= 0) {
+            revert AmountMustBeGreaterThan0(_quantity);
         }
         uint reserveBalance = reserveTokenAddress.balanceOf(address(this));
-        if (reserveBalance < unclaimedReserveBalance + _amount) {
-            revert InsufficientReserveBalance(_amount, reserveBalance);
+        if (reserveBalance < unclaimedReserveBalance + _quantity) {
+            revert InsufficientReserveBalance(_quantity, reserveBalance);
         }
         uint256 tokenId = _nextTokenId++;
-        unclaimedReserveBalance += _amount;
-        tokenERC20Balances[tokenId] = _amount;
+        unclaimedReserveBalance += _quantity;
+        tokenERC20Balances[tokenId] = _quantity;
         _mint(_to, tokenId);
-        emit ERC721NMinted(_to, tokenId, _amount);
+        emit ERC721NMinted(_to, tokenId, _quantity);
     }
 
     /**
