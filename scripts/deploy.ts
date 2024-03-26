@@ -13,6 +13,10 @@ async function main() {
   await erc721n.waitForDeployment();
 
   console.log("ERC721NTest deployed to:", await erc721n.getAddress());
+  console.log(
+    "ExampleReserveToken deployed to:",
+    await exampleERC20.getAddress()
+  );
 }
 
 // We recommend this pattern to be able to use async/await everywhere
