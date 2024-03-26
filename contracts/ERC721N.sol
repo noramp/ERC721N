@@ -161,6 +161,7 @@ abstract contract ERC721N is ERC721, ERC721Burnable, ReentrancyGuard {
         if (!success) {
             revert ERC20TransferFailed(msg.sender, amount);
         }
+        unclaimedReserveBalance -= amount;
 
         emit RedeemReserves(msg.sender, amount, tokenId);
     }
