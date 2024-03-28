@@ -6,7 +6,6 @@ The goal of ERC721N is to provide a fully compliant implementation of IERC721 wi
 
 The [NoRamp](https://twitter.com/NoRampLabs) team created ERC721N as an extension of the ERC721 standard with the additional features that make the NFTs token warrants on a treasury reserve ERC20. Mint NFT. Burn the NFT. Claim tokens.
 
-
 ![NoRamp Labs](https://imgur.com/1QsnGEE.png)
 
 For more information on how ERC721N works under the hood, please visit our [blog](https://medium.com/@NoRamp). To find other projects that are using ERC721N, please visit [erc721n.org](https://www.erc721n.org)
@@ -46,7 +45,7 @@ contract ERC721NTest is ERC721N {
     }
 
     function mint(address to, uint256 amount) external {
-        _safeMint(to, amount);
+        safeMint(to, amount);
     }
 }
 
