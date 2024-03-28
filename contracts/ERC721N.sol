@@ -63,10 +63,16 @@ abstract contract ERC721N is ERC721, ERC721Burnable, ReentrancyGuard {
     /**
      * @dev Initializes the contract by setting a `name` and a `symbol` to the token collection.
      *      Also sets the ERC20 token address that this contract interacts with.
-     * @param _erc20Token The ERC20 token address.
+     * @param erc20Token_ The ERC20 token address.
+     * @param name_ The name of the token collection.
+     * @param symbol_ The symbol of the token collection.
      */
-    constructor(IERC20 _erc20Token) ERC721("NoRamp721N", "NoRamp721N") {
-        reserveTokenAddress = _erc20Token;
+    constructor(
+        IERC20 erc20Token_,
+        string memory name_,
+        string memory symbol_
+    ) ERC721(name_, symbol_) {
+        reserveTokenAddress = erc20Token_;
         _owner = msg.sender;
     }
 
