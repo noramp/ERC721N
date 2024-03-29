@@ -139,13 +139,6 @@ abstract contract ERC721N is ERC721, ERC721Burnable, ReentrancyGuard {
     }
 
     /**
-     * @dev Returns the total balance of the reserve ERC20 token held by this contract.
-     */
-    function getReserveBalance() external view returns (uint) {
-        return reserveTokenAddress.balanceOf(address(this));
-    }
-
-    /**
      * @dev Allows the owner of a token to burn it and redeem the associated ERC20 balance.
      * @param tokenId The ID of the token to be burned.
      */
