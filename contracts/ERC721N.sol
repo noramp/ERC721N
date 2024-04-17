@@ -7,6 +7,8 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Burnable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+// SafeERC20
+import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
 /**
  * @title ERC721N
@@ -23,6 +25,8 @@ abstract contract ERC721N is ERC721, ERC721Burnable, ReentrancyGuard {
     // Owner of the contract
     address private _owner;
 
+    using SafeERC20 for IERC20;
+
     // Mapping from token ID to the ERC20 amount it holds
     mapping(uint256 => uint256) public tokenERC20Balances;
 
@@ -34,8 +38,6 @@ abstract contract ERC721N is ERC721, ERC721Burnable, ReentrancyGuard {
     /////////////////////////////////////////////
     /////// EVENTS
     /////////////////////////////////////////////
-    // Emitted when reserves are deposited
-    event DepositReserves(address indexed _from, uint256 indexed _amount);
     // Emitted when reserves are redeemed
     event RedeemReserves(
         address indexed _from,
@@ -55,10 +57,8 @@ abstract contract ERC721N is ERC721, ERC721Burnable, ReentrancyGuard {
     error Unauthorized(address caller);
     error AmountMustBeGreaterThan0(uint256 amount);
     error InsufficientReserveBalance(uint256 amount, uint256 reserveBalance);
-    error AllowanceTooLow(uint256 amount);
     error NoERC20BalanceToRedeem(uint256 tokenId);
     error NotOwnerOfToken(address caller, uint256 tokenId);
-    error ERC20TransferFailed(address sender, uint256 amount);
 
     /**
      * @dev Initializes the contract by setting a `name` and a `symbol` to the token collection.
@@ -105,37 +105,23 @@ abstract contract ERC721N is ERC721, ERC721Burnable, ReentrancyGuard {
         uint256 tokenId = _nextTokenId++;
         unclaimedReserveBalance += _quantity;
         tokenERC20Balances[tokenId] = _quantity;
-        _mint(_to, tokenId);
+        _safeMint(_to, tokenId);
         emit ERC721NMinted(_to, tokenId, _quantity);
     }
 
     /**
-     * @dev Modifier to check if the caller has allowed the contract to manage the specified amount of ERC20 tokens.
-     * @param amount The amount of ERC20 tokens to check allowance for.
+     * @dev Allows the owner of the contract to redeem any excessive ERC20 tokens that were sent to the contract.
      */
-    modifier checkAllowance(uint amount) {
-        if (reserveTokenAddress.allowance(msg.sender, address(this)) < amount) {
-            revert AllowanceTooLow(amount);
+    function claimExcessiveToken() public {
+        require(msg.sender == _owner, "only owner can claim fund");
+        uint256 balance = reserveTokenAddress.balanceOf(address(this));
+        if (balance > unclaimedReserveBalance) {
+            reserveTokenAddress.safeTransferFrom(
+                address(this),
+                msg.sender,
+                balance - unclaimedReserveBalance
+            );
         }
-        _;
-    }
-
-    /**
-     * @dev Allows users to deposit ERC20 tokens into the contract. Requires prior approval.
-     * @param _amount The amount of ERC20 tokens to deposit.
-     */
-    function depositReserves(
-        uint256 _amount
-    ) external checkAllowance(_amount) nonReentrant {
-        bool success = reserveTokenAddress.transferFrom(
-            msg.sender,
-            address(this),
-            _amount
-        );
-        if (!success) {
-            revert ERC20TransferFailed(msg.sender, _amount);
-        }
-        emit DepositReserves(msg.sender, _amount);
     }
 
     /**
@@ -148,7 +134,13 @@ abstract contract ERC721N is ERC721, ERC721Burnable, ReentrancyGuard {
         if (amount == 0) {
             revert NoERC20BalanceToRedeem(tokenId);
         }
-        if (msg.sender != ownerOf(tokenId)) {
+
+        address owner = ownerOf(tokenId);
+        if (
+            msg.sender != owner &&
+            !isApprovedForAll(owner, msg.sender) &&
+            _getApproved(tokenId) != msg.sender
+        ) {
             revert NotOwnerOfToken(msg.sender, tokenId);
         }
 
@@ -157,10 +149,7 @@ abstract contract ERC721N is ERC721, ERC721Burnable, ReentrancyGuard {
         unclaimedReserveBalance -= amount;
 
         // Attempt to transfer the ERC20 tokens to the caller
-        bool success = reserveTokenAddress.transfer(msg.sender, amount);
-        if (!success) {
-            revert ERC20TransferFailed(msg.sender, amount);
-        }
+        reserveTokenAddress.safeTransferFrom(address(this), msg.sender, amount);
 
         emit RedeemReserves(msg.sender, amount, tokenId);
     }
