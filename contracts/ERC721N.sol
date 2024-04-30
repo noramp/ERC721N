@@ -111,7 +111,7 @@ abstract contract ERC721N is ERC721, ERC721Burnable, ReentrancyGuard {
     /**
      * @dev Allows the owner of the contract to redeem any excessive ERC20 tokens that were sent to the contract.
      */
-    function claimExcessiveToken() public {
+    function claimExcessiveToken() external {
         require(msg.sender == _owner, "only owner can claim fund");
         uint256 balance = reserveTokenAddress.balanceOf(address(this));
         if (balance > unclaimedReserveBalance) {
