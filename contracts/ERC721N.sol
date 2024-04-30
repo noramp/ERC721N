@@ -76,13 +76,6 @@ abstract contract ERC721N is ERC721, ERC721Burnable, ReentrancyGuard {
     }
 
     /**
-     * @dev Returns the address of the reserve ERC20 token.
-     */
-    function getReserveTokenAddress() external view returns (address) {
-        return address(reserveTokenAddress);
-    }
-
-    /**
      * @dev Safely mints a new ERC721N token with a specific ERC20 balance to a designated address.
      *      Can only be called by the owner of the contract.
      * @param _to The address that will own the minted token.
