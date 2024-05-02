@@ -2,9 +2,9 @@
 
 ## About The Project
 
-The goal of ERC721N is to provide a fully compliant implementation of IERC721 with a bonus ERC20 Treasury Management and Redeemption system. This project and implementation will be updated regularly and will continue to stay up to date with best practices.
+The goal of ERC721N is to provide an implementation of IERC721 with an extra ERC20 Treasury Management and Redeemption layer. This project and implementation will be updated regularly and will continue to stay up to date with best practices.
 
-The [NoRamp](https://twitter.com/NoRampLabs) team created ERC721N as an extension of the ERC721 standard with the additional features that make the NFTs token warrants on a treasury reserve ERC20. Mint NFT. Burn the NFT. Claim tokens.
+The [NoRamp](https://twitter.com/NoRampLabs) team created ERC721N as an extension of the ERC721 standard with the additional features that make the NFT a USDC onboarding with on-chain treasury management of ERC20s. Mint NFT. Burn NFT. Claim tokens.
 
 ![NoRamp Labs](https://imgur.com/1QsnGEE.png)
 
@@ -25,6 +25,12 @@ https://docs.noramp.io/erc721n/quickstart
 ```sh
 
 npm install --save-dev erc721n
+
+```
+
+```sh
+
+yarn add -D erc721n
 
 ```
 
@@ -93,11 +99,10 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <!-- CONTACT -->
 
-## Contact
+## Contributors
 
 - rarepepi (owner) - [@rarepepi](https://twitter.com/rarepepi)
 - 0xinuarashi (maintainer) - [@0xinuarashi](https://twitter.com/0xinuarashi)
-- cygaar (maintainer) - [@0xCygaar](https://twitter.com/0xCygaar)
 - vectorized.eth (maintainer) - [@optimizoor](https://twitter.com/optimizoor)
 
 Project Link: [https://github.com/noramp/ERC721N](https://github.com/noramp/ERC721N)
