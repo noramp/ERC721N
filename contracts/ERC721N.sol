@@ -29,6 +29,9 @@ abstract contract ERC721N is ERC721, ERC721Burnable, ReentrancyGuard {
     // Mapping from token ID to the ERC20 amount it holds
     mapping(uint256 => uint256) public tokenERC20Balances;
 
+    // Each users can have multiple NFTs
+    mapping(address => uint256[]) public userNFTs;
+
     // The ERC20 token this contract interacts with
     IERC20 public reserveTokenAddress;
     // Total unclaimed ERC20 balance within minted NFTs
@@ -97,6 +100,7 @@ abstract contract ERC721N is ERC721, ERC721Burnable, ReentrancyGuard {
         uint256 tokenId = _nextTokenId++;
         unclaimedReserveBalance += _quantity;
         tokenERC20Balances[tokenId] = _quantity;
+        userNFTs[_to].push(tokenId);
         _safeMint(_to, tokenId);
         emit ERC721NMinted(_to, tokenId, _quantity);
     }
