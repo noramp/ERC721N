@@ -154,7 +154,8 @@ abstract contract ERC721N is ERC721, ERC721Burnable, ReentrancyGuard {
         unclaimedReserveBalance -= amount;
 
         // Attempt to transfer the ERC20 tokens to the caller
-        reserveTokenAddress.safeTransferFrom(address(this), msg.sender, amount);
+        reserveTokenAddress.transferFrom(address(this), msg.sender, amount);
+        // reserveTokenAddress.safeTransferFrom(address(this), msg.sender, amount);
 
         emit RedeemReserves(msg.sender, amount, tokenId);
     }
