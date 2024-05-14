@@ -120,6 +120,8 @@ abstract contract ERC721N is ERC721, ERC721Burnable, ReentrancyGuard {
         }
     }
 
+    //        reserveTokenAddress.approve(address(this), amount);
+
     /**
      * @dev Allows the owner of a token to burn it and redeem the associated ERC20 balance.
      * @param tokenId The ID of the token to be burned.
@@ -144,7 +146,7 @@ abstract contract ERC721N is ERC721, ERC721Burnable, ReentrancyGuard {
         unclaimedReserveBalance -= amount;
 
         // Attempt to transfer the ERC20 tokens to the caller
-        reserveTokenAddress.safeTransfer(msg.sender, amount);
+        reserveTokenAddress.safeTransferFrom(address(this), msg.sender, amount);
 
         emit RedeemReserves(msg.sender, amount, tokenId);
     }
