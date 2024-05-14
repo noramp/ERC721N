@@ -58,7 +58,11 @@ abstract contract ERC721N is ERC721, ERC721Burnable, ReentrancyGuard {
     /////////////////////////////////////////////
     error Unauthorized(address caller);
     error AmountMustBeGreaterThan0(uint256 amount);
-    error InsufficientReserveBalance(uint256 amount, uint256 reserveBalance);
+    error InsufficientReserveBalance(
+        uint256 amount,
+        uint256 reserveBalance,
+        uint256 unclaimedReserveBalance
+    );
     error NoERC20BalanceToRedeem(uint256 tokenId);
     error NotOwnerOfToken(address caller, uint256 tokenId);
 
@@ -95,7 +99,11 @@ abstract contract ERC721N is ERC721, ERC721Burnable, ReentrancyGuard {
         }
         uint reserveBalance = reserveTokenAddress.balanceOf(address(this));
         if (reserveBalance < unclaimedReserveBalance + _quantity) {
-            revert InsufficientReserveBalance(_quantity, reserveBalance);
+            revert InsufficientReserveBalance(
+                _quantity,
+                reserveBalance,
+                unclaimedReserveBalance
+            );
         }
         uint256 tokenId = _nextTokenId++;
         unclaimedReserveBalance += _quantity;
