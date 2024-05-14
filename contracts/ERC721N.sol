@@ -139,13 +139,12 @@ abstract contract ERC721N is ERC721, ERC721Burnable, ReentrancyGuard {
         ) {
             revert NotOwnerOfToken(msg.sender, tokenId);
         }
-
         _burn(tokenId); // Burn the NFT
         tokenERC20Balances[tokenId] = 0; // Reset the ERC20 balance for the token
         unclaimedReserveBalance -= amount;
 
         // Attempt to transfer the ERC20 tokens to the caller
-        reserveTokenAddress.safeTransferFrom(address(this), msg.sender, amount);
+        reserveTokenAddress.safeTransfer(msg.sender, amount);
 
         emit RedeemReserves(msg.sender, amount, tokenId);
     }
