@@ -120,8 +120,7 @@ abstract contract ERC721N is ERC721, ERC721Burnable, ReentrancyGuard {
         require(msg.sender == _owner, "only owner can claim fund");
         uint256 balance = reserveTokenAddress.balanceOf(address(this));
         if (balance > unclaimedReserveBalance) {
-            reserveTokenAddress.safeTransferFrom(
-                address(this),
+            reserveTokenAddress.safeTransfer(
                 msg.sender,
                 balance - unclaimedReserveBalance
             );
@@ -154,8 +153,7 @@ abstract contract ERC721N is ERC721, ERC721Burnable, ReentrancyGuard {
         unclaimedReserveBalance -= amount;
 
         // Attempt to transfer the ERC20 tokens to the caller
-        reserveTokenAddress.transferFrom(address(this), msg.sender, amount);
-        // reserveTokenAddress.safeTransferFrom(address(this), msg.sender, amount);
+        reserveTokenAddress.safeTransfer(msg.sender, amount);
 
         emit RedeemReserves(msg.sender, amount, tokenId);
     }
