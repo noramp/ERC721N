@@ -1,15 +1,25 @@
 import { ethers } from "hardhat";
 
 async function main() {
-  const ERC20Address = "0x5FbDB2315678afecb367f032d93F642f64180aa3"; // USDC on Sepolia
+  const network = await ethers.provider.getNetwork();
+  console.log(
+    `Deploying to network: ${network.name} (chainId: ${network.chainId})`
+  );
 
-  const exampleERC20 = await ethers.deployContract("ExampleReserveToken");
+  const [deployer] = await ethers.getSigners();
+  console.log(`Deploying contracts with the account: ${deployer.address}`);
 
+  const initialBalance = await ethers.provider.getBalance(deployer.address);
+  console.log(`Account balance: ${ethers.formatEther(initialBalance)} ETH`);
+
+  const ExampleReserveToken = await ethers.getContractFactory(
+    "ExampleReserveToken"
+  );
+  const exampleERC20 = await ExampleReserveToken.deploy();
   await exampleERC20.waitForDeployment();
 
-  const erc721n = await ethers.deployContract("ERC721NTest", [
-    exampleERC20.getAddress(),
-  ]);
+  const ERC721NTest = await ethers.getContractFactory("ERC721NTest");
+  const erc721n = await ERC721NTest.deploy(await exampleERC20.getAddress());
   await erc721n.waitForDeployment();
 
   console.log("ERC721NTest deployed to:", await erc721n.getAddress());
@@ -17,11 +27,16 @@ async function main() {
     "ExampleReserveToken deployed to:",
     await exampleERC20.getAddress()
   );
+
+  const finalBalance = await ethers.provider.getBalance(deployer.address);
+  console.log(
+    `Deployment cost: ${ethers.formatEther(initialBalance - finalBalance)} ETH`
+  );
+
+  console.log("Deployment and verification completed successfully");
 }
 
-// We recommend this pattern to be able to use async/await everywhere
-// and properly handle errors.
 main().catch((error) => {
-  console.error(error);
+  console.error("Deployment failed:", error);
   process.exitCode = 1;
 });
